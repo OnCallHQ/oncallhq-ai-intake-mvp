@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: oncallhq-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-oncallhq}
+      POSTGRES_USER: ${POSTGRES_USER:-oncallhq}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-oncallhq}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

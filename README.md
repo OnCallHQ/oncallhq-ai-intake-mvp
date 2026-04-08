@@ -1,121 +1,58 @@
-# oncallhq-ai-intake-mvp
-
-AI call intake + dispatch for home service businesses  
-focused on one problem: missed calls = lost jobs
-
----
-
 # OnCallHQ MVP
 
-## context
+OnCallHQ is an AI call intake and dispatch assistant for home service businesses.
 
-i’ve been talking to contractors online(mostly plumbing / home services) and the same thing keeps coming up:
+This repository is the v1 MVP monorepo. It is intentionally small and focused on the core intake loop:
 
-- they miss calls while on jobs  
-- missed call usually means the customer just calls the next guy  
-- answering services exist but honestly… they suck  
-  - wrong pricing  
-  - no real context  
-  - bad handoff  
+- capture missed-call requests
+- extract issue, urgency, location, and contact details
+- send a clean summary
+- create a ticket
 
-this MVP is just to test one thing:
+## Monorepo Structure
 
-**can we capture missed calls and turn them into clean, usable job info?**
+- `frontend/` - Next.js dashboard shell
+- `backend/` - FastAPI API skeleton
+- `docs/` - architecture and API notes
 
-not trying to build a full product yet  
-just trying to prove the core loop works
+## Stack
 
----
+- Frontend: Next.js, TypeScript, Tailwind CSS
+- Backend: FastAPI, Python
+- Database: PostgreSQL
+- Local orchestration: Docker Compose
 
-## goal (v1)
+## Getting Started
 
-when a contractor misses a call:
+### Frontend
 
-1. capture what the customer actually needs  
-2. extract key info (issue, urgency, location, contact)  
-3. send it cleanly to the contractor  
-4. let them decide what to do  
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-if this works consistently → we have something real
+### Backend
 
----
+```bash
+cd backend
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
 
-## high level flow
+### Infrastructure
 
-customer calls → twilio number  
+```bash
+docker-compose up -d db
+```
 
-- if contractor answers → nothing happens  
-- if missed → system kicks in  
+## MVP Boundaries
 
-AI flow:
-- speech → text  
-- understand request  
-- extract structured data  
-- classify urgency  
-- create ticket  
+- No business logic yet
+- No background jobs
+- No third-party integrations yet
+- No auth yet
 
-output:
-- sms to contractor (clean summary)  
-- dashboard entry  
-
----
-
-## what actually matters
-
-- **no wrong pricing** (this kills trust instantly)  
-- clean info, not long transcripts  
-- fast response (few seconds max)  
-- should work even if the caller is messy or unclear  
-
----
-
-## what we are NOT doing (right now)
-
-- no scheduling system  
-- no payments  
-- no CRM features  
-- no over-engineering  
-
-just intake + dispatch. nothing else.
-
----
-
-## MVP stack (initial thinking)
-
-- twilio → call handling  
-- speech-to-text → transcription  
-- llm → extraction + classification  
-- backend → api + ticket creation  
-- sms → contractor notification  
-- simple dashboard → job view  
-
----
-
-## open questions
-
-- how accurate does extraction need to be before it's actually useful?  
-- what kind of urgency classification do contractors care about?  
-- is sms enough or do they expect auto-callback?  
-- what builds trust fastest in this space?  
-
----
-
-## definition of success
-
-- contractors say: “this actually saves me jobs”  
-- they respond to leads coming from this  
-- they don’t complain about bad / wrong info  
-
-if we hit that → we double down  
-if not → we rethink fast  
-
----
-
-## notes
-
-this is intentionally simple  
-
-we’re not building a “startup product” yet  
-we’re testing if this problem is real enough and solvable  
-
-everything here is flexible based on real feedback
+This scaffold is meant to give the team a clean starting point for the next implementation pass.
