@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 const navigation = [
+  { href: "/intake", label: "Intake Console" },
   { href: "/dashboard", label: "Dashboard" },
   { href: "/tickets", label: "Tickets" },
   { href: "/settings", label: "Settings" },
