@@ -3,9 +3,15 @@ from pydantic import BaseModel
 
 class Ticket(BaseModel):
     id: str
-    contact_name: str
-    contact_phone: str
-    issue: str
+    caller_name: str
+    callback_phone: str
+    service_address: str
+    issue_summary: str
+    transcript: str | None = None
+    summary: str
     urgency: str
-    location: str
+    emergency: bool
     status: str
+    source: str
+    created_at: str
+    updated_at: str

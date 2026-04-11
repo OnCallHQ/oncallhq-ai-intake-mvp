@@ -4,7 +4,7 @@ import { PageHeader } from "@/components/page-header";
 const settings = [
   "Business profile and service area",
   "Dispatch notification preferences",
-  "Webhook and provider credentials",
+  "Phone, webhook, and provider credentials",
 ];
 
 export default function SettingsPage() {
